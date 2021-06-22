@@ -1,0 +1,335 @@
+/****************************************************************************
+ * @copyright   LIU Zhao
+ * @authors     LIU Zhao (liuzhaomax@163.com)
+ * @date        2021/5/21 4:08
+ * @version     v1.0
+ * @filename    main.css
+ * @description 
+ ***************************************************************************/
+
+* {
+    font-family: "Microsoft YaHei", Arial, sans-serif;
+    line-height: 24px;
+    z-index: 1;
+}
+
+body {
+    display: block;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+p, li {
+    font-size: 14px;
+}
+
+img {
+    width: 100%;
+}
+
+input, select {
+    margin-bottom: 16px;
+    border: 2px solid #333;
+    height: 40px;
+}
+
+h4 {
+    margin-bottom: 8px;
+}
+
+svg {
+    font-size: 12px;
+    position: absolute;
+    overflow: auto;
+}
+
+#container {
+    margin: 0 auto;
+    width: 80%;
+    height: 100%;
+    min-width: 1000px;
+}
+
+.main, .side {
+    display: block;
+    margin: 0.5%;
+    position: relative;
+}
+
+#main {
+    width: 70%;
+    height: 100%;
+}
+
+#side {
+    width: 25%;
+    height: 1600px;
+    padding: 0 4px;
+}
+
+.btn {
+    width: 45.2%;
+    margin: 0 2% 16px 2%;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: white;
+    color: #333;
+}
+
+.btn-activated {
+    background-color: #333;
+    color: white;
+}
+
+.btn:hover {
+    background-color: #545454;
+    color: white;
+    cursor: pointer;
+}
+
+.combobox {
+    width: 92%;
+    margin: 0 2% 16px 2%;
+}
+
+.spinner {
+    width: 95%;
+    margin: 0 2% 16px 2%;
+}
+
+.main-south, #heat-bar {
+    margin-top: 50px;
+}
+
+.side-south {
+    margin-top: 160px;
+}
+
+.references{
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.list {
+    display: none;
+    position: absolute;
+    width: 92%;
+    margin: -16px 2% 16px 2%;
+    background-color: white;
+    font-size: 14px;
+    line-height: 14px;
+    overflow-y: auto;
+    border: 1px solid #545454;
+}
+
+.rc-combobox-region-list, .rc-combobox-country-list {
+    height: 265px;
+}
+
+.factors-combobox-list {
+    height: 265px;
+}
+
+.list-item:hover {
+    cursor: pointer;
+    background-color: #1E90FF;
+    color: white;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+.ul-factors-desc li, .ul-factors-desc li span {
+    line-height: 23px;
+}
+
+.ul-factors-desc li span{
+    font-weight: bold;
+}
+
+.legend {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    font-weight: bold;
+    width: 200px;
+    height: 50px;
+}
+
+.legend text {
+    font-size: 18px;
+}
+
+.legend-map {
+    margin-left: 15px;
+    left: 0;
+    top: 450px;
+}
+
+.legend-heat {
+    left: 500px;
+    top: 1320px;
+}
+
+.tooltip {
+    display: none;
+    position: absolute;
+    background-color: white;
+    color: #333;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 0 5px;
+    z-index: 999;
+}
+
+#tooltip-bar, #tooltip-map, #tooltip-box-line {
+    width: 250px;
+    height: 230px;
+}
+
+#tooltip-box {
+    width: 215px;
+    height: 140px;
+}
+
+#tooltip-heat {
+    width: 240px;
+    height: 80px;
+}
+
+#tooltip-heat p {
+    line-height: 12px;
+}
+
+.tooltip p, .tooltip span {
+    font-size: 12px;
+    line-height: 6px;
+}
+
+.tooltip p:first-child {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.tooltip span {
+    color: steelblue;
+    font-weight: bold;
+}
+
+#main, #side,
+.main-north-south-west, .main-north-south-east,
+.main-south-south-west, .main-south-south-east,
+.btn-country, .btn-region, .btn-desc, .btn-asc,
+.scatter {
+    float: left;
+}
+
+.clear-float {
+    clear: both;
+}
+
+.scatter {
+    width: 18.5%;
+    height: 120px;
+}
+
+#map {
+    width: 98.5%;
+    height: 500px;
+    background-color: rgba(230,245,251,0.4);
+}
+
+.btn-map-reset {
+    position: absolute;
+    width: 60px;
+    height: 26px;
+    font-size: 16px;
+    line-height: 8px;
+    margin: 0;
+    border-radius: 5px;
+    top: 480px;
+    right: 10px;
+}
+
+#zoom-me {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: red;
+    line-height: 16px;
+    margin: 0;
+    background-color: white;
+    left: 70px;
+    top: 300px;
+    animation: zoom-me 1s;
+}
+@keyframes zoom-me {
+    0% {top: 300px}
+    25% {top: 280px}
+    50% {top: 300px}
+    75% {top: 280px}
+    100% {top: 300px}
+}
+
+.main-north-south-west, .main-north-south-east {
+    width: 48.7%;
+    height: 300px;
+    overflow: auto;
+}
+
+#heat {
+    width: 98.5%;
+    height: 500px;
+}
+
+.btn-heat {
+    position: absolute;
+    width: 80px;
+    height: 26px;
+    font-size: 16px;
+    line-height: 8px;
+    margin: 0 0 0 5px;
+    border-radius: 5px;
+    top: 1334px;
+}
+
+.btn-heat-n-pi-5-6 {
+    left: 0;
+}
+.btn-heat-p-pi-3 {
+    left: 90px;
+}
+.btn-heat-n-pi-2 {
+    left: 180px;
+}
+.btn-heat-p-pi-2 {
+    left: 270px;
+}
+.btn-heat-bar-visibility {
+    right: 10px;
+    width: 130px;
+}
+
+#heat-bar {
+    position: absolute;
+    display: block;
+    top: 825px;
+    right: 4px;
+    width: 220px;
+    height: 450px;
+    background-color: rgba(255,255,255,0.7);
+}
+
+#regression {
+    width: 39.5%;
+    height: 250px;
+}
+
+.main-south-south-east {
+    width: 57.9%;
+}

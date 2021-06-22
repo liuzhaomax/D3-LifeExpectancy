@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Monash Uni, FIT5147, Narrative Visualization Project">
+    <meta name="author" content="Zhao Liu">
+    <meta name="sid" content="30822750">
+    <title>Life Expectancy</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <script src="https://unpkg.com/simple-statistics@7.7.0/dist/simple-statistics.min.js"></script>
+    <script src="https://unpkg.com/d3-3d/build/d3-3d.js"></script>
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script src="https://d3js.org/topojson.v3.min.js"></script>
+    <script src="./lib/legend.js"></script>
+</head>
+<body>
+    <div id="container">
+        <div id="main" class="main">
+            <div class="main-north">
+                <div class="main-north-north">
+                    <svg id="map" class="main"></svg>
+                    <svg id="legend-map" class="legend legend-map"></svg>
+                    <input type="button" id="btn-map-reset" class="btn btn-map-reset" value="Reset">
+                    <div id="zoom-me">Zoom Here!</div>
+                </div>
+                <div class="main-north-south">
+                    <div class="main main-north-south-west">
+                        <svg id="bar"></svg>
+                    </div>
+                    <div class="main main-north-south-east">
+                        <svg id="box"></svg>
+                    </div>
+                    <div class="clear-float"></div>
+                </div>
+            </div>
+            <div class="main-south">
+                <div class="main-south-north">
+                    <svg id="heat" class="main"></svg>
+                    <input type="button" id="btn-heat-n-pi-5-6" class="btn btn-heat btn-heat-n-pi-5-6 btn-activated" value="Front">
+                    <input type="button" id="btn-heat-p-pi-3" class="btn btn-heat btn-heat-p-pi-3" value="Back">
+                    <input type="button" id="btn-heat-n-pi-2" class="btn btn-heat btn-heat-n-pi-2" value="Top">
+                    <input type="button" id="btn-heat-p-pi-2" class="btn btn-heat btn-heat-p-pi-2" value="Bottom">
+                    <svg id="heat-bar" class="main"></svg>
+                    <svg id="legend-heat" class="legend legend-heat"></svg>
+                    <input type="button" id="btn-heat-bar-visibility" class="btn btn-heat btn-heat-bar-visibility" value="Close Side Bar">
+                </div>
+                <div class="main-south-south">
+                    <svg id="regression" class="main main-south-south-west"></svg>
+                    <div class="main main-south-south-east">
+                        <div>
+                            <svg id="scatter-1" class="main scatter"></svg>
+                            <svg id="scatter-2" class="main scatter"></svg>
+                            <svg id="scatter-3" class="main scatter"></svg>
+                            <svg id="scatter-4" class="main scatter"></svg>
+                            <svg id="scatter-5" class="main scatter"></svg>
+                            <div class="clear-float"></div>
+                        </div>
+                        <div>
+                            <svg id="scatter-6" class="main scatter"></svg>
+                            <svg id="scatter-7" class="main scatter"></svg>
+                            <svg id="scatter-8" class="main scatter"></svg>
+                            <svg id="scatter-9" class="main scatter"></svg>
+                            <svg id="scatter-10" class="main scatter"></svg>
+                            <div class="clear-float"></div>
+                        </div>
+                    </div>
+                    <div class="clear-float"></div>
+                </div>
+            </div>
+            <div class="main-references">
+                <h4>Data Sources</h4>
+                <p class="references">
+                    1. Life Expectancy (WHO). Provided by Kumar Rajarshi.
+                    Tabular data: 2938 rows and 22 columns.
+                    https://www.kaggle.com/kumarajarshi/life-expectancy-who <br/>
+                    2. World Happiness. Provided by Sustainable Development Solutions Network.
+                    Tabular data in CSV: 158 rows and 12 columns.
+                    https://www.kaggle.com/unsdsn/world-happiness
+                </p>
+            </div>
+        </div>
+        <div id="side" class="side">
+            <div class="side-north">
+                <h2>Life Expectancy</h2>
+                <p>
+                    This page shows the visualisation of life expectancy in 2015 around the world,
+                    and the correlation between average life expectancy and top 10 factors of influences.
+                </p>
+                <img src="img/title.jpg" alt="title">
+                <h4>Displaying Status:</h4>
+                <input class="btn btn-region btn-activated" type="button" value="Region">
+                <input class="btn btn-country" type="button" value="Country">
+                <h4>Countries / Regions:</h4>
+                <label>
+                    <input id="rc-combobox" class="combobox combobox-country-region" type="text" placeholder="Please select countries or regions." readonly>
+                </label>
+                <div id="rc-combobox-region-list" class="list rc-combobox-region-list">
+                    <div class="list-item list-item-rc list-item-region" value="all">All (not selected yet)</div>
+                </div>
+                <div id="rc-combobox-country-list" class="list rc-combobox-country-list">
+                    <div class="list-item list-item-rc list-item-country" value="all">All (not selected yet)</div>
+                </div>
+                <h4>Attributes:</h4>
+                <label for="attributes"></label>
+                <select id="attributes" class="spinner"></select>
+                <h4>Order:</h4>
+                <input class="btn btn-desc btn-activated" type="button" value="↓ Desc">
+                <input class="btn btn-asc" type="button" value="↑ Asc">
+            </div>
+            <div class="side-south">
+                <p>
+                    The factors which can influence life expectancy are various. We only consider the top 10 factors.
+                </p>
+                <h4>Top 10 Factors:</h4>
+                <label>
+                    <input id="factors-combobox" class="combobox combobox-factors" type="text" placeholder="Please select factors." readonly>
+                </label>
+                <div id="factors-combobox-list" class="list factors-combobox-list">
+                    <div class="list-item list-item-factors" value="all">All (not selected yet)</div>
+                </div>
+                <ul class="ul-factors-desc">
+                    <li><span>Adult.mortality: </span>Adult Mortality Rates of both sexes (probability of dying between 15 and 60 years per 1000 population)</li>
+                    <li><span>Alcohol: </span>Recorded per capita (15+) consumption (in litres of pure alcohol)</li>
+                    <li><span>BMI: </span>Average Body Mass Index of entire population</li>
+                    <li><span>Polio: </span>Polio (Pol3) immunization coverage among 1-year-olds (%)</li>
+                    <li><span>Diphtheria: </span>Diphtheria tetanus toxoid and pertussis (DTP3) immunization coverage among 1-year-olds (%)</li>
+                    <li><span>HIV/AIDS: </span>Deaths per 1000 live births HIV/AIDS (0-4 years)</li>
+                    <li><span>Thinness.5.9.years: </span>Prevalence of thinness among children for Age 5 to 9(%)</li>
+                    <li><span>Schooling: </span>Number of years of Schooling (years)</li>
+                    <li><span>Income.composition.of.resources: </span>Human Development Index in terms of income composition of resources (index ranging from 0 to 1)</li>
+                    <li><span>Happiness.score: </span>Happiness rate on a scale of 0 to 10 where 10 is the happiest</li>
+                </ul>
+                <img src="img/happiness.jpg" alt="happiness">
+            </div>
+        </div>
+        <div id="tooltip-map" class="tooltip"></div>
+        <div id="tooltip-bar" class="tooltip"></div>
+        <div id="tooltip-box" class="tooltip"></div>
+        <div id="tooltip-box-line" class="tooltip"></div>
+        <div id="tooltip-heat" class="tooltip"></div>
+        <div id="tooltip-heat-bar" class="tooltip"></div>
+        <div id="tooltip-regression" class="tooltip"></div>
+    </div>
+    <script src="js/main/init.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/main/util.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/svg/bar.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/svg/box.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/svg/map.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/svg/heat.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/svg/heatBar.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/svg/scatter.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/svg/regression.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/main/data.js" type="text/javascript" charset="UTF-8"></script>
+    <script src="js/main/link.js" type="text/javascript" charset="UTF-8"></script>
+</body>
+</html>
